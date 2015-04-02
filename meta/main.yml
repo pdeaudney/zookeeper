@@ -1,0 +1,17 @@
+---
+galaxy_info:
+  author: playlist
+  company: Playlist
+  description: Installs Zookeeper
+  min_ansible_version: 1.8
+  license: MIT
+  platforms:
+    - name: Ubuntu
+      versions:
+        - All
+  categories:
+    - database
+    - web
+
+dependencies:
+  - role: playlist.java

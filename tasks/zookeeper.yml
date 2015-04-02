@@ -1,0 +1,43 @@
+---
+- file: path=/opt/src state=directory
+- file: path={{zookeeper_install_dir}} state=directory
+
+- name: download zookeeper
+  get_url: url={{zookeeper_url}} dest=/opt/src/zookeeper-{{zookeeper_version}}.tar.gz
+
+- name: unpack tarball
+  command: tar zxf /opt/src/zoookeeper-{{zookeeper_version}}.tar.gz --strip-components=1 chdir={{zookeeper_install_dir}} creates={{zookeeper_install_dir}}/bin
+
+- name: create zookeeper group
+  group: name=zookeeper system=yes
+
+- name: create zookeeper user
+  user: name=zookeeper group=zookeeper system=yes
+
+- name: change ownership on zookeeper directory
+  file: >
+    path={{zookeeper_install_dir}}
+    state=directory
+    recurse=yes
+    owner=zookeeper
+    group=zookeeper
+
+- name: create zookeeper data directory
+  file: >
+    path={{zookeeper_data_dir}}
+    state=directory
+    recurse=yes
+    owner=zookeeper
+    group=zookeeper
+
+- name: create zookeeper logs directory
+  file: >
+    path={{zookeeper_log_dir}}
+    state=directory
+    recurse=yes
+    owner=zookeeper
+    group=zookeeper
+
+- name: add upstart script
+  template: src=zookeeper.conf.j2 dest=/etc/init/zookeeper.conf
+
