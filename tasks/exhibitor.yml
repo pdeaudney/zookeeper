@@ -23,6 +23,18 @@
     chdir=/opt/src/exhibitor-{{exhibitor_version}}
     creates={{exhibitor_install_dir}}/exhibitor.jar
 
+- name: configure exhibitor
+  template: >
+    src={{item}}.j2
+    dest={{exhibitor_install_dir}}/{{item}}
+    owner=root
+    group=root
+    mode=0644
+  with_items:
+    - credentials.properties
+    - defaults.conf
+    - web.xml
+
 - name: change ownership on exhibitor directory
   file: >
     path={{exhibitor_install_dir}}
