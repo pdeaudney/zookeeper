@@ -23,15 +23,11 @@
     chdir=/opt/src/exhibitor-{{exhibitor_version}}
     creates={{exhibitor_install_dir}}/exhibitor.jar
 
-- name: configure exhibitor
+- name: create start script
   template: >
-    src={{item}}.j2
-    dest={{exhibitor_install_dir}}/{{item}}
-    mode=0644
-  with_items:
-    - credentials.properties
-    - defaults.conf
-    - web.xml
+    src=start.sh.j2
+    dest={{exhibitor_install_dir}}/start.sh
+    mode=0755
 
 - name: change ownership on exhibitor directory
   file: >
@@ -41,5 +37,27 @@
     owner=zookeeper
     group=zookeeper
 
-- name: add upstart script
-  template: src=exhibitor.conf.j2 dest=/etc/init/exhibitor.conf
+- name: configure exhibitor
+  template: >
+    src={{item}}.j2
+    dest={{exhibitor_install_dir}}/{{item}}
+    mode=0644
+    owner=zookeeper
+    group=zookeeper
+  with_items:
+    - credentials.properties
+    - defaults.conf
+    - log4j.properties
+    - realm
+    - web.xml
+  notify:
+    - restart exhibitor
+
+- name: add init script
+  template: >
+    src=exhibitor.init.j2
+    dest=/etc/init.d/exhibitor
+    mode=0755
+
+# - name: start exhibitor
+#   service: name=exhibitor state=started enabled=yes
