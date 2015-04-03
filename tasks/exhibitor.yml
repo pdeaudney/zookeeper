@@ -1,0 +1,35 @@
+---
+- name: install maven
+  apt: pkg=maven state=present
+
+- file: path=/opt/src state=directory
+- file: path=/opt/src/exhibitor-{{exhibitor_version}} state=directory
+- file: path={{exhibitor_install_dir}} state=directory
+
+- name: create exhibitor pom.xml
+  template: >
+    src=pom.xml.j2
+    dest=/opt/src/exhibitor-{{exhibitor_version}}/pom.xml
+
+- name: build exhibitor
+  command: >
+    mvn clean package
+    chdir=/opt/src/exhibitor-{{exhibitor_version}}
+    creates=/opt/src/exhibitor-{{exhibitor_version}}/target
+
+- name: install exhibitor
+  command: >
+    mv target/exhibitor-1.0.jar {{exhibitor_install_dir}}/exhibitor.jar
+    chdir=/opt/src/exhibitor-{{exhibitor_version}}
+    creates={{exhibitor_install_dir}}/exhibitor.jar
+
+- name: change ownership on exhibitor directory
+  file: >
+    path={{exhibitor_install_dir}}
+    state=directory
+    recurse=yes
+    owner=zookeeper
+    group=zookeeper
+
+- name: add upstart script
+  template: src=exhibitor.conf.j2 dest=/etc/init/exhibitor.conf
