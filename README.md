@@ -1,7 +1,7 @@
 # Ansible Zookeeper Role
 
 [![Circle CI](https://circleci.com/gh/playlist-ansible/zookeeper.svg?style=shield)](https://circleci.com/gh/playlist-ansible/zookeeper)
-[![Galaxy](https://img.shields.io/badge/galaxy-playlist.zookeeper-blue.svg)](https://galaxy.ansible.com/list#/roles/3242)
+[![Galaxy](https://img.shields.io/badge/galaxy-playlist.zookeeper-blue.svg)](https://galaxy.ansible.com/list#/roles/3317)
 
 Installs and configures Zookeeper (managed with Exhibitor).
 
