@@ -1,0 +1,22 @@
+#!/bin/bash -ex
+
+EXHIBITOR_OPTS="--port {{exhibitor_port}}"
+EXHIBITOR_OPTS="$EXHIBITOR_OPTS --defaultconfig {{exhibitor_install_dir}}/defaults.conf"
+EXHIBITOR_OPTS="$EXHIBITOR_OPTS --configtype s3"
+EXHIBITOR_OPTS="$EXHIBITOR_OPTS --s3config \"{{exhibitor_s3_bucket}}:{{exhibitor_s3_prefix}}\""
+EXHIBITOR_OPTS="$EXHIBITOR_OPTS --s3credentials {{exhibitor_install_dir}}/credentials.properties"
+EXHIBITOR_OPTS="$EXHIBITOR_OPTS --s3region \"{{exhibitor_s3_region}}\""
+EXHIBITOR_OPTS="$EXHIBITOR_OPTS --s3backup true"
+{% if zookeeper_password %}
+EXHIBITOR_OPTS="$EXHIBITOR_OPTS --security web.xml --realm Zookeeper:realm --remoteauth basic:zk"
+{% endif %}
+
+if [ -f "/usr/bin/ec2metadata" ] ; then
+  OS_HOSTNAME=$(ec2metadata --public-hostname)
+else
+  OS_HOSTNAME=$(hostname -f)
+fi
+
+cd {{exhibitor_install_dir}}
+HOSTNAME=${EXHIBITOR_HOSTNAME:-$OS_HOSTNAME}
+exec java -Dlog4j.configuration=file:///{{exhibitor_install_dir}}/log4j.properties -jar {{exhibitor_install_dir}}/exhibitor.jar --hostname ${HOSTNAME} ${EXHIBITOR_OPTS}
