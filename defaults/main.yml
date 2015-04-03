@@ -11,6 +11,7 @@ zookeeper_log_dir: /var/log/zookeeper
 exhibitor_version: 1.5.5
 exhibitor_install_dir: "/opt/exhibitor-{{exhibitor_version}}"
 exhibitor_log_dir: "{{zookeeper_log_dir}}"
+exhibitor_port: 8181
 
 exhibitor_s3_bucket: mybucket
 exhibitor_s3_prefix: zookeeper
