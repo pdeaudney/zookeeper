@@ -15,3 +15,6 @@ galaxy_info:
 
 dependencies:
   - role: playlist.java
+    java_packages:
+      - openjdk-7-jre
+      - openjdk-7-jdk
