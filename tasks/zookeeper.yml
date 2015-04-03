@@ -37,7 +37,3 @@
     recurse=yes
     owner=zookeeper
     group=zookeeper
-
-- name: add upstart script
-  template: src=zookeeper.conf.j2 dest=/etc/init/zookeeper.conf
-
