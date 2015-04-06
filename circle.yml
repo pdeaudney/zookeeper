@@ -10,9 +10,9 @@ dependencies:
   override:
     - docker info
     - if [[ -e ~/docker/image.tar ]]; then docker load -i ~/docker/image.tar; fi
-    - docker pull playlist/ansible:latest
-    - mkdir -p ~/docker; docker save playlist/ansible > ~/docker/image.tar
-    - pip install ansible docker-py
+    - docker pull playlist/infrastructure:latest
+    - mkdir -p ~/docker; docker save playlist/infrastructure > ~/docker/image.tar
+    - sudo pip install ansible docker-py
 
 test:
   override:
