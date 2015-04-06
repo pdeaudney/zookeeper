@@ -6,6 +6,7 @@ if [[ $OSTYPE == darwin* ]]; then
   CONTAINER_HOST="$(boot2docker ip)"
 fi
 sed "s/HOST/$CONTAINER_HOST/" tests/inventory.template > tests/inventory
+chmod 600 tests/insecure.key
 
 # Install role
 tar czf tests/role .
@@ -25,7 +26,7 @@ docker run --name=ansible-test -d -p 2201:22 playlist/infrastructure /sbin/init
 # Auto-remove the container on exit
 function finish {
   echo "Killing docker container"
-  docker kill ansible-test && docker rm ansible-test
+  (docker kill ansible-test && docker rm ansible-test) || true
 }
 trap finish EXIT
 
