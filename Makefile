@@ -1,4 +1,5 @@
 test:
-	docker run -v ${PWD}:/etc/ansible/roles/role -t playlist/ansible /etc/ansible/roles/role/tests/run.sh
+	#docker run -v ${PWD}:/etc/ansible/roles/role -d playlist/infrastructure /etc/ansible/roles/role/tests/run.sh
+	./tests/run.sh
 
-.PHONY: all
+.PHONY: test
