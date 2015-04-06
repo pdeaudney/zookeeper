@@ -9,7 +9,8 @@ sed "s/HOST/$CONTAINER_HOST/" tests/inventory.template > tests/inventory
 chmod 600 tests/insecure.key
 
 # Install role
-tar czf tests/role .
+tar czf role .
+mv role tests/role
 cd tests
 ansible-galaxy install -f role
 rm role
