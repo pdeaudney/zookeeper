@@ -8,8 +8,8 @@ fi
 sed "s/HOST/$CONTAINER_HOST/" tests/inventory.template > tests/inventory
 
 # Install role
+tar czf tests/role .
 cd tests
-tar czf role ../
 ansible-galaxy install -f role
 rm role
 
