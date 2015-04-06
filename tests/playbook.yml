@@ -1,7 +1,8 @@
 ---
-- hosts: all
+- hosts: localhost
+  remote_user: root
   sudo: yes
   vars:
     - test_environment: true
   roles:
-  - role
+  - zookeeper

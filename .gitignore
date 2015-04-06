@@ -1,4 +1,1 @@
-.ansible/
 .vagrant/
-tests/role*
-tests/inventory
