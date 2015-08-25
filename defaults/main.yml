@@ -20,7 +20,7 @@ exhibitor_s3_access_key_id: mykey
 exhibitor_s3_access_secret_key: mysecret
 
 exhibitor_log_index_directory: "{{zookeeper_log_dir}}"
-exhibitor_zookeeper_install_directory: "{{zookeeper_log_dir}}"
+exhibitor_zookeeper_install_directory: "{{zookeeper_install_dir}}"
 exhibitor_zookeeper_data_directory: "{{zookeeper_data_dir}}"
 exhibitor_zookeeper_log_directory: "{{zookeeper_log_dir}}"
 exhibitor_servers_spec: ""
