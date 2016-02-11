@@ -78,5 +78,6 @@ exhibitor_auto_manage_instances_apply_all_at_once: 1
 ```
 $ git clone https://github.com/playlist-ansible/zookeeper.git
 $ cd zookeeper
-$ make
+$ vagrant up
+$ vagrant provision
 ```
