@@ -1,6 +1,5 @@
 # Ansible Zookeeper Role
 
-[![Circle CI](https://circleci.com/gh/playlist-ansible/zookeeper.svg?style=shield)](https://circleci.com/gh/playlist-ansible/zookeeper)
 [![Travis CI](https://travis-ci.org/playlist-ansible/zookeeper.svg?branch=master)](https://travis-ci.org/playlist-ansible/zookeeper)
 [![Galaxy](https://img.shields.io/badge/galaxy-playlist.zookeeper-blue.svg)](https://galaxy.ansible.com/list#/roles/3317)
 
