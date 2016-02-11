@@ -3,20 +3,22 @@ language: python
 python: 2.7
 
 env:
-  - SITE=playbook.yml
+  - ANSIBLE_VERSION=1.9.4
+  - ANSIBLE_VERSION=2.0.0.2
 
 before_install:
   - sudo apt-get update -qq
 
 install:
-  - pip install ansible
+  - pip install ansible==$ANSIBLE_VERSION
   - "cp tests/ansible.cfg ansible.cfg"
+  - ansible-galaxy install -r tests/requirements.yml
 
 script:
-  - "ansible-playbook -i tests/inventory tests/$SITE --syntax-check"
-  - "ansible-playbook -i tests/inventory tests/$SITE --connection=local --sudo"
+  - "ansible-playbook -i tests/inventory tests/playbook.yml --syntax-check"
+  - "ansible-playbook -i tests/inventory tests/playbook.yml --connection=local --sudo"
   - >
-    ansible-playbook -i tests/inventory tests/$SITE --connection=local --sudo
+    ansible-playbook -i tests/inventory tests/playbook.yml --connection=local --sudo
     | grep -q 'changed=0.*failed=0'
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
