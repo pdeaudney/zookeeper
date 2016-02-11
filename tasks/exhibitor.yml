@@ -52,6 +52,8 @@
     - web.xml
   notify:
     - restart exhibitor
+  sudo: yes
+  sudo_user: zookeeper
 
 - name: add init script
   template: >
