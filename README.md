@@ -7,7 +7,7 @@ Installs and configures Zookeeper (managed with Exhibitor).
 
 ## Requirements and Dependencies
 
-Depends on a JRE (`playlist.java`).
+Depends on a JRE ([playlist.java](https://github.com/playlist-ansible/java)).
 
 ## Installation
 
@@ -37,8 +37,8 @@ exhibitor_port: 8181
 exhibitor_s3_bucket: mybucket
 exhibitor_s3_prefix: zookeeper
 exhibitor_s3_region: us-east-1
-exhibitor_s3_access_key_id: mykey
-exhibitor_s3_access_secret_key: mysecret
+#exhibitor_s3_access_key_id: mykey
+#exhibitor_s3_access_secret_key: mysecret
 
 exhibitor_log_index_directory: "{{zookeeper_log_dir}}"
 exhibitor_zookeeper_install_directory: "{{zookeeper_log_dir}}"
@@ -63,6 +63,16 @@ exhibitor_observer_threshold: 999
 exhibitor_auto_manage_instances_fixed_ensemble_size:
 exhibitor_auto_manage_instances_apply_all_at_once: 1
 ```
+
+If you want to use [key pair authentication](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html)
+when accessing `exhibitor_s3_bucket` define:
+
+```yaml
+exhibitor_s3_access_key_id: mykey
+exhibitor_s3_access_secret_key: mysecret
+```
+
+otherwise exhibitor will use [IAM role authentication](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html).
 
 ## Example Playbook
 

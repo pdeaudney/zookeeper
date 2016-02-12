@@ -45,7 +45,6 @@
     owner=zookeeper
     group=zookeeper
   with_items:
-    - credentials.properties
     - defaults.conf
     - log4j.properties
     - realm
@@ -55,11 +54,23 @@
   sudo: yes
   sudo_user: zookeeper
 
+- name: configure exhibitor s3 credentials
+  template: >
+    src={{item}}.j2
+    dest={{exhibitor_install_dir}}/credentials.properties
+    mode=0644
+    owner=zookeeper
+    group=zookeeper
+  notify:
+    - restart exhibitor
+  sudo: yes
+  sudo_user: zookeeper
+  when: >
+    exhibitor_s3_access_key_id is defined and
+    exhibitor_s3_access_secret_key is defined
+
 - name: add init script
   template: >
     src=exhibitor.init.j2
     dest=/etc/init.d/exhibitor
     mode=0755
-
-# - name: start exhibitor
-#   service: name=exhibitor state=started enabled=yes
