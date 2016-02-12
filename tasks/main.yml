@@ -1,3 +1,8 @@
 ---
 - include: zookeeper.yml
+  tags:
+  - zookeeper
+
 - include: exhibitor.yml
+  tags:
+  - exhibitor

@@ -75,11 +75,12 @@ Vagrant.configure(2) do |config|
     sudo apt-get update -qq
     sudo apt-get install python-dev python-pip -y
     sudo pip install ansible
+    rm -rf /tmp/zookeeper
     cp -R /vagrant /tmp/zookeeper
-    cd /tmp/zookeeper
-    cp tests/ansible.cfg ansible.cfg
-    ansible-galaxy install playlist.java
-    ansible-playbook -i tests/inventory tests/playbook.yml --syntax-check
-    ansible-playbook -i tests/inventory tests/playbook.yml --connection=local --sudo
+    cd /tmp/zookeeper/tests
+    ansible-galaxy install -r requirements.yml
+    ANSIBLE_EXTRA_VARS="exhibitor_config_type=none"
+    ansible-playbook -i "localhost," playbook.yml --extra-vars=$ANSIBLE_EXTRA_VARS --syntax-check
+    ansible-playbook -i "localhost," playbook.yml --extra-vars=$ANSIBLE_EXTRA_VARS --connection=local --sudo
   SHELL
 end

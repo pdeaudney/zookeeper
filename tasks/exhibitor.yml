@@ -66,8 +66,20 @@
   sudo: yes
   sudo_user: zookeeper
   when: >
+    exhibitor_config_type == 's3' and
     exhibitor_s3_access_key_id is defined and
     exhibitor_s3_access_secret_key is defined
+
+- name: create exhibitor none config directory
+  file: >
+    path={{exhibitor_none_config_dir}}
+    state=directory
+    recurse=yes
+    owner=zookeeper
+    group=zookeeper
+  notify:
+    - restart exhibitor
+  when: exhibitor_config_type == 'none'
 
 - name: add init script
   template: >
