@@ -23,10 +23,10 @@ exhibitor_s3_region: us-east-1
 
 exhibitor_none_config_dir: /var/lib/exhibitor
 
-exhibitor_log_index_directory: "{{zookeeper_log_dir}}"
-exhibitor_zookeeper_install_directory: "{{zookeeper_install_dir}}"
-exhibitor_zookeeper_data_directory: "{{zookeeper_data_dir}}"
-exhibitor_zookeeper_log_directory: "{{zookeeper_log_dir}}"
+exhibitor_log_index_dir: "{{zookeeper_log_dir}}"
+exhibitor_zookeeper_install_dir: "{{zookeeper_install_dir}}"
+exhibitor_zookeeper_data_dir: "{{zookeeper_data_dir}}"
+exhibitor_zookeeper_log_dir: "{{zookeeper_log_dir}}"
 exhibitor_servers_spec: ""
 exhibitor_backup_extra: "throttle\\=&bucket-name\\={{exhibitor_s3_bucket}}&key-prefix\\={{exhibitor_s3_prefix}}&max-retries\\=4&retry-sleep-ms\\=30000"
 exhibitor_zoo_cfg_extra: "tickTime\\=2000&initLimit\\=10&syncLimit\\=5&quorumListenOnAllIPs\\=true"

@@ -34,16 +34,20 @@ exhibitor_install_dir: "/opt/exhibitor-{{exhibitor_version}}"
 exhibitor_log_dir: "{{zookeeper_log_dir}}"
 exhibitor_port: 8181
 
+exhibitor_config_type: s3
+
 exhibitor_s3_bucket: mybucket
 exhibitor_s3_prefix: zookeeper
 exhibitor_s3_region: us-east-1
 #exhibitor_s3_access_key_id: mykey
 #exhibitor_s3_access_secret_key: mysecret
 
-exhibitor_log_index_directory: "{{zookeeper_log_dir}}"
-exhibitor_zookeeper_install_directory: "{{zookeeper_log_dir}}"
-exhibitor_zookeeper_data_directory: "{{zookeeper_data_dir}}"
-exhibitor_zookeeper_log_directory: "{{zookeeper_log_dir}}"
+exhibitor_none_config_dir: /var/lib/exhibitor
+
+exhibitor_log_index_dir: "{{zookeeper_log_dir}}"
+exhibitor_zookeeper_install_dir: "{{zookeeper_log_dir}}"
+exhibitor_zookeeper_data_dir: "{{zookeeper_data_dir}}"
+exhibitor_zookeeper_log_dir: "{{zookeeper_log_dir}}"
 exhibitor_servers_spec: ""
 exhibitor_backup_extra: "throttle\\=&bucket-name\\={{exhibitor_s3_bucket}}&key-prefix\\={{exhibitor_s3_prefix}}&max-retries\\=4&retry-sleep-ms\\=30000"
 exhibitor_zoo_cfg_extra: "tickTime\\=2000&initLimit\\=10&syncLimit\\=5&quorumListenOnAllIPs\\=true"
@@ -84,7 +88,7 @@ otherwise exhibitor will use [IAM role authentication](http://docs.aws.amazon.co
 
 ## Testing
 
-```
+```bash
 $ git clone https://github.com/playlist-ansible/zookeeper.git
 $ cd zookeeper
 $ vagrant up
