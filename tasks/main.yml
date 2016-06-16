@@ -6,3 +6,9 @@
 - include: exhibitor.yml
   tags:
   - exhibitor
+
+- name: Ensure exhibitor service running
+  service: >
+    name=exhibitor
+    state=started
+    enabled=yes

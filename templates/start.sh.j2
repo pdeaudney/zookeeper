@@ -18,15 +18,7 @@ EXHIBITOR_OPTS="$EXHIBITOR_OPTS --s3backup true"
 EXHIBITOR_OPTS="$EXHIBITOR_OPTS --security web.xml --realm Zookeeper:realm --remoteauth basic:zk"
 {% endif %}
 
-{% if exhibitor_config_type == 's3' %}
-if [ -f "/usr/bin/ec2metadata" ] ; then
-  OS_HOSTNAME=$(ec2metadata --public-hostname)
-else
-  OS_HOSTNAME=$(hostname -f)
-fi
-{% else %}
 OS_HOSTNAME=$(hostname -f)
-{% endif %}
 
 cd {{exhibitor_install_dir}}
 HOSTNAME=${EXHIBITOR_HOSTNAME:-$OS_HOSTNAME}
